@@ -10,8 +10,8 @@ server.listen(port, () => {
   console.log(`Starting server at ${port}...`);
 });
 
-server.use(express.static('public'));
-server.use(express.json({ limit: '1mb' }));
+app.use(express.static('public'));
+app.use(express.json({ limit: '1mb' }));
 
 const database = new Datastore('database.db');
 database.loadDatabase();
