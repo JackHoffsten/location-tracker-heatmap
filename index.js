@@ -5,7 +5,7 @@ const Datastore = require('nedb');
 const app = express();
 const port = process.env.PORT || 8443;
 
-https.createServer(app).listen(port, () => {
+app.listen(port, () => {
   console.log(`Starting server at ${port}...`);
 });
 
