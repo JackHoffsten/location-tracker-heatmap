@@ -16,7 +16,7 @@ app.use(express.json({ limit: '1mb' }));
 const database = new Datastore('database.db');
 database.loadDatabase();
 
-server.get('/all', (req, res) => {
+app.get('/all', (req, res) => {
   database.find({}, (err, data) => {
     if (err) {
       res.end();
@@ -27,7 +27,7 @@ server.get('/all', (req, res) => {
   });
 });
 
-server.post('/location', (req, res) => {
+app.post('/location', (req, res) => {
     const data = req.body;
     const timestamp = Date.now();
 
