@@ -21,21 +21,21 @@
     <script type="text/javascript">
       let lat, lon;
 
+      if (navigator.geolocation) {
+        console.log('Geolocation available.');
+        navigator.geolocation.getCurrentPosition(async position => {
+          lat = position.coords.latitude;
+          lon = position.coords.longitude;
+
+          document.getElementById('latitude').textContent = lat;
+          document.getElementById('longitude').textContent = lon;
+        });
+      } else {
+        console.log('Geolocation not available');
+      }
+
       const button = document.getElementById('submit');
       button.addEventListener('click', async event => {
-          if (navigator.geolocation) {
-            console.log('Geolocation available.');
-            navigator.geolocation.getCurrentPosition(async position => {
-              lat = position.coords.latitude;
-              lon = position.coords.longitude;
-
-              document.getElementById('latitude').textContent = lat;
-              document.getElementById('longitude').textContent = lon;
-            });
-          } else {
-            console.log('Geolocation not available');
-          }
-          
             const subject = document.getElementById('subject').value;
             const data = { lat, lon, subject };
             const options = {
