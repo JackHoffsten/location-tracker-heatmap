@@ -21,7 +21,7 @@
     <script type="text/javascript">
       let lat, lon;
 
-      if ("geolocation" in navigator) {
+      if (navigator.geolocation) {
         console.log('Geolocation available.');
         navigator.geolocation.getCurrentPosition(async position => {
           lat = position.coords.latitude;
