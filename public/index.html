@@ -30,8 +30,8 @@
         console.log('Geolocation available.');
 
         function success(pos) {
-          lat = position.coords.latitude;
-          lon = position.coords.longitude;
+          lat = pos.coords.latitude;
+          lon = pos.coords.longitude;
 
           document.getElementById('latitude').textContent = lat;
           document.getElementById('longitude').textContent = lon;
