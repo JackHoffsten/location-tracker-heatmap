@@ -20,18 +20,31 @@
     </p>
     <script type="text/javascript">
       let lat, lon;
+      const geoOptions = {
+        enableHighAccuracy: true,
+        timeout: 5000,
+        maximumAge: 0
+      };
 
-      if (navigator.geolocation) {
+      if ("geolocation" in navigator) {
         console.log('Geolocation available.');
-        navigator.geolocation.getCurrentPosition(async position => {
+
+        function success(pos) {
           lat = position.coords.latitude;
           lon = position.coords.longitude;
 
           document.getElementById('latitude').textContent = lat;
           document.getElementById('longitude').textContent = lon;
-        });
+        }
+
+        function error(err) {
+          alert(`ERROR(${err.code}): ${err.message}`);
+        }
+
+        navigator.geolocation.getCurrentPosition(success, error, geoOptions);
+
       } else {
-        console.log('Geolocation not available');
+        alert('Geolocation not available');
       }
 
       const button = document.getElementById('submit');
