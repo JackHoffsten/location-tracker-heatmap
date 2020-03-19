@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Location Tracker</title>
+  </head>
+  <body>
+    <p>
+      <a href="../">Go to submit</a>
+    </p>
+    <script type="text/javascript">
+      getData();
+
+      async function getData() {
+        const res = await fetch('/all');
+        const data = await res.json();
+
+        if (data.length == 0) {
+          const empty = document.createElement('p').textContent = 'Empty.';
+          document.body.append(empty);
+        } else {
+          for (item of data) {
+            const root = document.createElement('div');
+            const subject = document.createElement('div');
+            const geo = document.createElement('div');
+            const date = document.createElement('div');
+
+            subject.textContent = `Subject: ${item.subject}`;
+            geo.textContent = `${item.lat}°, ${item.lon}°`;
+            const dateString = new Date(item.timestamp).toLocaleString();
+            date.textContent = dateString;
+
+            root.append(subject, geo, date);
+            document.body.append(root);
+          }
+
+          console.log(data);
+        }
+      }
+    </script>
+  </body>
+</html>

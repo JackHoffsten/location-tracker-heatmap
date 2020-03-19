@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Location Tracker</title>
+  </head>
+  <body>
+    <h1>Yo</h1>
+    <p>
+      Latitude: <span id="latitude"></span>&deg;<br />
+      Longitude: <span id="longitude"></span>&deg;
+    </p>
+    <label for="subject">Subject:</label>
+    <input id="subject" />
+    <button id="submit">Submit</button>
+    <p>
+      <a href="/all.html">Show all data</a>
+    </p>
+    <script type="text/javascript">
+      let lat, lon;
+
+      if ("geolocation" in navigator) {
+        console.log('Geolocation available.');
+        navigator.geolocation.getCurrentPosition(async position => {
+          lat = position.coords.latitude;
+          lon = position.coords.longitude;
+
+          document.getElementById('latitude').textContent = lat;
+          document.getElementById('longitude').textContent = lon;
+        });
+      } else {
+        console.log('Geolocation not available');
+      }
+
+      const button = document.getElementById('submit');
+      button.addEventListener('click', async event => {
+            const subject = document.getElementById('subject').value;
+            const data = { lat, lon, subject };
+            const options = {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify(data)
+            };
+
+            const res = await fetch('/location', options);
+            const resJson = await res.json();
+            console.log(resJson);
+      });
+    </script>
+  </body>
+</html>
