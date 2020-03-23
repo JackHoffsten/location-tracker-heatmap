@@ -2,7 +2,6 @@ const express = require('express');
 const Datastore = require('nedb');
 const https = require('https');
 const fs = require('fs');
-const path = require('path');
 
 const app = express();
 const port = process.env.PORT || 443;
@@ -36,8 +35,8 @@ app.post('/location', (req, res) => {
 });
 
 const httpsOptions = {
-  key: fs.readFileSync(path.join(__dirname, 'ssl', 'key.pem')),
-  cert: fs.readFileSync(path.join(__dirname, 'ssl', 'cert.pem')),
+  key: fs.readFileSync('/ssl/key.pem'),
+  cert: fs.readFileSync('/ssl/cert.pem'),
 };
 
 https.createServer(httpsOptions, app).listen(port, () => {
