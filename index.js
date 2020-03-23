@@ -1,10 +1,12 @@
 const express = require('express');
 const Datastore = require('nedb');
-const https = require('https');
-const fs = require('fs');
 
 const app = express();
-const port = process.env.PORT || 443;
+const port = process.env.PORT || 3443;
+
+app.listen(port, () => {
+  console.log(`Starting server at ${port}...`);
+});
 
 app.use(express.static('public'));
 app.use(express.json({ limit: '1mb' }));
@@ -32,13 +34,4 @@ app.post('/location', (req, res) => {
     database.insert(data);
 
     res.json(data);
-});
-
-const httpsOptions = {
-  key: fs.readFileSync('app/ssl/key.pem'),
-  cert: fs.readFileSync('app/ssl/cert.pem'),
-};
-
-https.createServer(httpsOptions, app).listen(port, () => {
-  console.log(`Starting server at ${port}...`);
 });
