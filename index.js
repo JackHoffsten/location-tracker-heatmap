@@ -35,8 +35,8 @@ app.post('/location', (req, res) => {
 });
 
 const httpsOptions = {
-  key: fs.readFileSync('location-tracker-heatmap/ssl/key.pem'),
-  cert: fs.readFileSync('location-tracker-heatmap/ssl/cert.pem'),
+  key: fs.readFileSync('app/ssl/key.pem'),
+  cert: fs.readFileSync('app/ssl/cert.pem'),
 };
 
 https.createServer(httpsOptions, app).listen(port, () => {
