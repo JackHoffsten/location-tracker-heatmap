@@ -35,8 +35,8 @@ app.post('/location', (req, res) => {
 });
 
 const httpsOptions = {
-  key: fs.readFileSync('app/ssl/key.pem'),
-  cert: fs.readFileSync('app/ssl/cert.pem'),
+  key: fs.readFileSync('key.pem'),
+  cert: fs.readFileSync('cert.pem'),
 };
 
 https.createServer(httpsOptions, app).listen(port, () => {
